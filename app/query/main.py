@@ -39,6 +39,7 @@ def main():
     This will pull keywords from a file given with the "-k" or "-keywords" parameter. 
 
     """
+
     load_dotenv()
     api_key: Final = os.getenv("YOUTUBE_APIV3")
 

@@ -2,6 +2,10 @@ from torch.utils.data import Dataset
 from PIL import Image
 
 class CustomDataset(Dataset):
+    """
+    Model used to create the dataset type used with pytorch
+    """
+
     def __init__(self, image_paths, labels, transform=None):
         self.image_paths = image_paths
         self.labels = labels

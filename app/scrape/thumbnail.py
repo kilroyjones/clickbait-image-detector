@@ -16,6 +16,7 @@ def get_youtube_thumbnail_url(video_id: str) -> str:
     Returns:
     - str, URL of the highest quality thumbnail image.
     """
+
     base_url: str = "https://img.youtube.com/vi/"
     highest_quality: str = "/maxresdefault.jpg"
     
@@ -33,6 +34,7 @@ def fetch_thumbnail(url: str) -> Tuple[bytes, bool]:
     Returns:
     - Tuple[bytes, bool]: The content of the image in bytes and a boolean indicating success.
     """
+
     try:
         response = requests.get(url, timeout=10)
         response.raise_for_status()  # Raises HTTPError for bad responses

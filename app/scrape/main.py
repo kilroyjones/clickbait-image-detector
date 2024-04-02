@@ -1,5 +1,5 @@
 """
-
+The scraper will get all images which have not been downloaded, as according to the database.
 """
 
 import sqlite3
@@ -22,7 +22,8 @@ def download_images(conn: sqlite3.Connection, delay: int = 3):
         image_urls (List[str]): The list of image URLs to download.
         delay (int): The number of seconds to wait between downloads to avoid hammering the server.
     """
-    image_urls = db.get_downloads(conn)
+
+    image_urls = db.get_videos_not_downloaded(conn)
     videos = [Video(**video_data) for video_data in image_urls]
 
     # Loop over all video information 

@@ -23,7 +23,6 @@ def search(query: str, api_key: str, max_results: int = 10):
         List[Dict[str, str]]: A list of dictionaries, each containing data about a video.
     """
 
-
     youtube  = build('youtube', 'v3', developerKey=api_key)
 
     # pylint: disable=no-member
