@@ -4,8 +4,9 @@ TODO: Adjust based on this https://github.com/akrapukhin/MobileNetV3/blob/main/t
 """
 
 
-import sys
+import argparse
 import torch
+import sys
 
 from torchvision import transforms, models
 from torch.utils.data import DataLoader
@@ -111,6 +112,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
         
         print(f"Epoch {epoch+1}/{num_epochs}, Loss: {running_loss/len(train_loader)}, Training Accuracy: {train_accuracy}, Validation Loss: {val_loss}")
 
+    # Values unused at this point
     return train_acc_history, val_loss_history
 
 
@@ -160,6 +162,12 @@ def main():
     """
     
     """
+    
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description='Train and export a MobileNetV3 model.')
+    parser.add_argument('-e', '--export', type=str, required=False, help='File path to export the trained model.')
+    args = parser.parse_args()
+
     conn = db.create_connection('output.sqlite')
     if not conn:
         print("Unable to connect to database.")
@@ -190,7 +198,12 @@ def main():
 
 
     # Use these returned values?
-    train_acc_history, val_loss_history = train_model(model, train_loader, validate_loader, criterion, optimizer)
+    train_model(model, train_loader, validate_loader, criterion, optimizer)
+
+
+    if args.export:
+        print("Saving model to", args.export)
+        torch.save(model.state_dict(), args.export)
 
     validate_model(model, validate_loader, criterion)
 
