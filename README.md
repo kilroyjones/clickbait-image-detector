@@ -32,20 +32,13 @@ To get started clone the repo and then create a virtualenv in the root folder an
 
 ```bash
 virtualenv -p python3 venv
-export PYTHONPATH=$(pwd)
+. venv/bin/activate
 ```
 
 Alternatively, you can use [Poetry](https://python-poetry.org/) or something else, as well. Either way, after that, you can install from the **requirements.txt**.
 
 ```bash
 pip install -r requirements.txt
-```
-
-Normally, I create a script to start things up, because one does get tired of typing this everytime they restart the terminal:
-
-```bash
-export PYTHONPATH=$(pwd)
-. .venv/bin/activate
 ```
 
 Lastly, in in the **app** folder, change the **template.env** to **.env** and then add in your YouTubeAPI key. This you can get through the [Google's developer console](https://console.cloud.google.com/products/solutions/).
@@ -63,7 +56,7 @@ The first script queries the YouTubeAPI by using keywords or phrases from the de
 Running from the root folder:
 
 ```bash
-python app/query/main.py -f keywords.txt
+python -m app.query.main -k keywords.txt
 ```
 
 I have been using ChatGPT or something similar to generate potential queries. The keywords you put in the file will be removed one by one as they are queried.
@@ -71,7 +64,7 @@ I have been using ChatGPT or something similar to generate potential queries. Th
 Next, you'll scrape the images, which will end up in the **downloads** folder. I've set the default delay to 3 seconds, but you can probably get away with shorter.
 
 ```bash
-python app/scrape/main.py
+python -m app.scrape.main
 ```
 
 After you've scraped the images and the field in the database will be set to **1** and you'll want to classify the images. The script used to classify is relatively simple. It's a tkinter window that accepts any keyboard input. Whatever you press becomes that _class_ for that photo.
@@ -79,13 +72,13 @@ After you've scraped the images and the field in the database will be set to **1
 To run the classifier do the following and then start hitting keys. In my database you'll see 1 and 2, representing clickbait and not clickbait, respectively.
 
 ```bash
-python app/classify/main.py
+python -m app.classify.main
 ```
 
 Lastly, you'll want to train the model. You can run this to train without saving the model:
 
 ```bash
-python app/train/main.py
+python -m app.train.main
 ```
 
 Or to export the model use:

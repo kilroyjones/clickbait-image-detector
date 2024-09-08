@@ -57,5 +57,3 @@ types-requests==2.31.0.20240311
 typing_extensions==4.10.0
 uritemplate==4.1.1
 urllib3==2.2.1
-# Editable install with no version control (your_app==0.1)
--e /home/kilroy/code/projects/yt-scraper/app
